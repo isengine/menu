@@ -1,0 +1,149 @@
+{
+	
+	# описание
+	
+	для бутстрап-меню и офф-канвас-меню должны быть использованы отдельные шаблоны
+	
+	через шаблон вы также можете более гибко управлять всеми элементами меню, в том числе использовать те возможности, которые были ранее
+	например, добавлять доп. классы и данные, подключать блоки, менять содержимое
+	
+	можно использовать следующие текстовые переменные - вместо них автоматически будут подставлены нужные значения:
+	{id} - сквозная нумерация
+	{name} - имя
+	{fullname} - полное имя
+	{lang} - имя из языкового файла
+	{parent} - последний родитель
+	{parents} - все родители
+	{link} - ссылка
+	{level} - уровень вложенности, с 1
+	
+	меню будет собираться в шаблоне после вызова метода build() без параметров
+	по следующей структуре:
+	
+	<main-wrapper>
+		<main-container-before>
+		</main-container-before>
+		<main-container>
+			<main-item-before>
+			</main-item-before>
+			<main-item>
+				<main-link-before>
+				</main-link-before>
+				<main-link>
+					<main-inner-before>
+					</main-inner-before>
+					<main-inner>
+					</main-inner>
+					<main-inner-after>
+					</main-inner-after>
+				</main-link>
+				<sub-wrapper>
+					<sub-container-before>
+					</sub-container-before>
+					<sub-container>
+						<sub-item-before>
+						</sub-item-before>
+						<sub-item>
+							<sub-link-before>
+							</sub-link-before>
+							<sub-link>
+								<sub-inner-before>
+								</sub-inner-before>
+								<sub-inner>
+								</sub-inner>
+								<sub-inner-after>
+								</sub-inner-after>
+							</sub-link>
+							<sub-link-after>
+							</sub-link-after>
+						</sub-item>
+						<sub-item-after>
+						</sub-item-after>
+					</sub-container>
+					<sub-container-after>
+					</sub-container-after>
+				</sub-wrapper>
+				<main-link-after>
+				</main-link-after>
+			</main-item>
+			<main-item-after>
+			</main-item-after>
+		</main-container>
+		<main-container-after>
+		</main-container-after>
+	</main-wrapper>
+		
+	-separator будут вставлены по необходимости между item
+	-link-disable будут заменять -link по необходимости
+	
+	!нет генератора, который раньше создавал пункты меню из контента
+	
+	# настройки
+	
+	"index"          : true, // разрешает главную ссылку
+	"index-active"   : true, // разрешает подсвечивать главную ссылку активной
+	"disable-active" : true, // выключает текущую ссылку
+	"disable-sub"    : true, // выключает ссылки с элементами, содержащими поменю
+	
+	"separator-before" : null, // main, sub, true - для всех, кроме первого, [] array с перечислением имен
+	
+	"custom" : [], // массив вместо карты структуры
+	"disable" : [], // массив выключенных элементов, выключение родителей выключает все вложения
+	
+	"levels" : "", // число уровней вложенности, с 1, 0 - все
+	
+	"elements" : {
+		
+		"main-wrapper" : "div:main_wrapper",
+		"main-separator" : "div:main_separator",
+		
+		"main-container-before" : "div:main_container_before",
+		"main-container"        : "div:main_container",
+		"main-container-after"  : "div:main_container_after",
+		
+		"main-item-before" : "div:main_item_before",
+		"main-item"        : "div:main_item",
+		"main-item-after"  : "div:main_item_after",
+		
+		"main-link-before"  : "div:main_link_before",
+		"main-link"         : "div:main_link",
+		"main-link-disable" : "div:main_link_disable",
+		"main-link-after"   : "div:main_link_after",
+		
+		"main-inner-before" : "div:main_inner_before",
+		"main-inner"        : "div:main_inner",
+		"main-inner-after"  : "div:main_inner_after",
+		
+		"sub-wrapper"   : "div:sub_wrapper",
+		"sub-separator" : "div:sub_separator",
+		
+		"sub-container-before" : "div:sub_container_before",
+		"sub-container"        : "div:sub_container",
+		"sub-container-after"  : "div:sub_container_after",
+		
+		"sub-item-before" : "div:sub_item_before",
+		"sub-item"        : "div:sub_item",
+		"sub-item-after"  : "div:sub_item_after",
+		
+		"sub-link-before"  : "div:sub_link_before",
+		"sub-link"         : "div:sub_link",
+		"sub-link-disable" : "div:sub_link_disable",
+		"sub-link-after"   : "div:sub_link_after",
+		
+		"sub-inner-before" : "div:sub_inner_before",
+		"sub-inner"        : "div:sub_inner",
+		"sub-inner-after"  : "div:sub_inner_after"
+		
+	},
+	
+	"classes" : {
+		
+		"item-home" : "some",
+		"item-active" : "some",
+		
+		"link-home" : "some",
+		"link-active" : "some"
+		
+	}
+	
+}
