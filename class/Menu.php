@@ -87,6 +87,11 @@ class Menu extends Master {
 		$it_after  = &$this -> eget($type . '-item-after');
 		
 		if ($wrapper) {
+			if ($parent_active && $sets['classes']['wrapper-active']) {
+				$wrapper -> addClass($sets['classes']['wrapper-active']);
+			} else {
+				$wrapper -> leaveFirstClass();
+			}
 			$print .= $wrapper -> open();
 		}
 		
@@ -97,6 +102,11 @@ class Menu extends Master {
 		}
 		
 		if ($container) {
+			if ($parent_active && $sets['classes']['container-active']) {
+				$container -> addClass($sets['classes']['container-active']);
+			} else {
+				$container -> leaveFirstClass();
+			}
 			$print .= $container -> open();
 		}
 		
@@ -122,16 +132,23 @@ class Menu extends Master {
 				$parent_active = null;
 			}
 			
-			$i          = &$this -> eget($type . '-item');
-			$i_dropdown = &$this -> eget($type . '-item-dropdown');
-			$i_active   = &$this -> eget($type . '-item-active');
+			$i                 = &$this -> eget($type . '-item');
+			$i_active          = &$this -> eget($type . '-item-active');
+			$i_dropdown        = &$this -> eget($type . '-item-dropdown');
+			$i_dropdown_active = &$this -> eget($type . '-item-dropdown-active');
 			
-			if ($active && $i_active) {
-				$it = &$i_active;
-			} elseif ($sub && $i_dropdown) {
-				$it = &$i_dropdown;
+			if ($sub && ($i_dropdown || $i_dropdown_active)) {
+				if ($active && $i_dropdown_active) {
+					$it = &$i_dropdown_active;
+				} else {
+					$it = &$i_dropdown;
+				}
 			} else {
-				$it = &$i;
+				if ($active && $i_active) {
+					$it = &$i_active;
+				} else {
+					$it = &$i;
+				}
 			}
 			
 			if ($active && $sets['classes']['item-active']) {
@@ -144,24 +161,34 @@ class Menu extends Master {
 			$link_before = &$this -> eget($type . '-link-before');
 			$link_after  = &$this -> eget($type . '-link-after');
 
-			$l          = &$this -> eget($type . '-link');
-			$l_dropdown = &$this -> eget($type . '-link-dropdown');
-			$l_active   = &$this -> eget($type . '-link-active');
+			$l                 = &$this -> eget($type . '-link');
+			$l_active          = &$this -> eget($type . '-link-active');
+			$l_dropdown        = &$this -> eget($type . '-link-dropdown');
+			$l_dropdown_active = &$this -> eget($type . '-link-dropdown-active');
 			
-			if ($active && $l_active) {
-				$link = &$l_active;
-				if ($sets['link-active']) {
-					$link -> addLink('{link}');
-				}
-			} elseif ($sub && $l_dropdown) {
-				$link = &$l_dropdown;
-				if ($sets['link-dropdown']) {
-					$link -> addLink('{link}');
+			if ($sub && ($l_dropdown || $l_dropdown_active)) {
+				if ($active && $l_dropdown_active) {
+					$link = &$l_dropdown_active;
+					if ($sets['link-active'] && $sets['link-dropdown'] && $link -> getTag() === 'a') {
+						$link -> addLink('{link}');
+					}
+				} else {
+					$link = &$l_dropdown;
+					if ($sets['link-dropdown'] && $link -> getTag() === 'a') {
+						$link -> addLink('{link}');
+					}
 				}
 			} else {
-				$link = &$l;
-				if ($sets['link-auto']) {
-					$link -> addLink('{link}');
+				if ($active && $l_active) {
+					$link = &$l_active;
+					if ($sets['link-active'] && $link -> getTag() === 'a') {
+						$link -> addLink('{link}');
+					}
+				} else {
+					$link = &$l;
+					if ($sets['link-auto'] && $link -> getTag() === 'a') {
+						$link -> addLink('{link}');
+					}
 				}
 			}
 			
