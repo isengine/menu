@@ -58,16 +58,23 @@ class Menu extends Master {
 		// параметры данного метода - чисто служебные,
 		// при запуске их указывать не нужно
 		
+		$sets = &$this -> settings;
+		
 		if (!$target) {
-			$target = &$this -> map;
+			if ($sets['custom']) {
+				$target = &$sets['custom'];
+			} else {
+				$target = &$this -> map;
+			}
 		}
 		
 		if (!System::typeOf($target, 'iterable')) {
 			return;
 		}
 		
+		$this -> setVariables($parent);
+		
 		$print = null;
-		$sets = &$this -> settings;
 		$type = $parent ? 'sub' : 'main';
 		
 		$parent_active = null;
@@ -116,7 +123,6 @@ class Menu extends Master {
 			$print .= $it_before -> close();
 		}
 		
-		$this -> setVariables($parent);
 		$this -> print .= $this -> variables($print);
 		unset($print);
 		
@@ -125,6 +131,12 @@ class Menu extends Master {
 			$sub = System::typeOf($item, 'iterable');
 			$name = ($parent ? $parent . ':' : null) . $key;
 			$active = $name === $this -> current;
+			
+			if ($sets['disable'] && Objects::match($sets['disable'], $name)) {
+				continue;
+			}
+			
+			$this -> setVariables($name);
 			
 			if (!$parents_list_for_active) {
 				$parent_active = $sub && $this -> route && Objects::first($this -> route, 'value') === $name;
@@ -137,7 +149,11 @@ class Menu extends Master {
 			$i_dropdown        = &$this -> eget($type . '-item-dropdown');
 			$i_dropdown_active = &$this -> eget($type . '-item-dropdown-active');
 			
-			if ($sub && ($i_dropdown || $i_dropdown_active)) {
+			if (
+				$sub &&
+				($i_dropdown || $i_dropdown_active) &&
+				(!$sets['levels'] || $sets['levels'] && $this -> variables['level'] + 1 < $sets['levels'])
+			) {
 				if ($active && $i_dropdown_active) {
 					$it = &$i_dropdown_active;
 				} else {
@@ -166,7 +182,11 @@ class Menu extends Master {
 			$l_dropdown        = &$this -> eget($type . '-link-dropdown');
 			$l_dropdown_active = &$this -> eget($type . '-link-dropdown-active');
 			
-			if ($sub && ($l_dropdown || $l_dropdown_active)) {
+			if (
+				$sub &&
+				($l_dropdown || $l_dropdown_active) &&
+				(!$sets['levels'] || $sets['levels'] && $this -> variables['level'] + 1 < $sets['levels'])
+			) {
 				if ($active && $l_dropdown_active) {
 					$link = &$l_dropdown_active;
 					if ($sets['link-active'] && $sets['link-dropdown'] && $link -> getTag() === 'a') {
@@ -248,11 +268,13 @@ class Menu extends Master {
 				
 				// subitem
 				
-				$this -> setVariables($name);
 				$this -> print .= $this -> variables($print);
 				unset($print);
 				
-				if ($sub) {
+				if (
+					$sub &&
+					(!$sets['levels'] || $sets['levels'] && $this -> variables['level'] + 1 < $sets['levels'])
+				) {
 					$this -> build($item, $name);
 				}
 				
@@ -268,19 +290,19 @@ class Menu extends Master {
 				$print .= $it -> close();
 			}
 			
-			$this -> setVariables($name);
 			$this -> print .= $this -> variables($print);
 			unset($print);
 			
 		}
 		unset($key, $item);
 		
+		$this -> setVariables($parent);
+		
 		if ($it_after) {
 			$print .= $it_after -> open();
 			$print .= $it_after -> content();
 			$print .= $it_after -> close();
 			
-			$this -> setVariables($parent);
 			$this -> print .= $this -> variables($print);
 			unset($print);
 		}
@@ -294,7 +316,6 @@ class Menu extends Master {
 			$print .= $after -> content();
 			$print .= $after -> close();
 			
-			$this -> setVariables($parent);
 			$this -> print .= $this -> variables($print);
 			unset($print);
 		}

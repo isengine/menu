@@ -23,11 +23,11 @@ $view = View::getInstance();
 ?>
 <nav class="navbar navbar-expand-md navbar-light">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="#">Navbar</a>
+		<a class="navbar-brand" href="#"><?= $view -> get('lang|title'); ?></a>
 		<a class="btn d-md-none" data-bs-toggle="offcanvas" href="#offcanvasMenu<?= $instance; ?>" role="button" aria-controls="offcanvasMenu<?= $instance; ?>">
 			<span class="navbar-toggler-icon"></span>
 		</a>
-		<div class="collapse navbar-collapse">
+		<div class="collapse navbar-collapse justify-content-end">
 			<?php $view -> get('module') -> launch('menu', 'bootstrap-normal', $sets_original); ?>
 		</div>
 	</div>
@@ -35,22 +35,10 @@ $view = View::getInstance();
 
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu<?= $instance; ?>" aria-labelledby="offcanvasMenu<?= $instance; ?>Label">
 	<div class="offcanvas-header">
-		<h5 class="offcanvas-title" id="offcanvasMenu<?= $instance; ?>Label">Navbar</h5>
+		<h5 class="offcanvas-title" id="offcanvasMenu<?= $instance; ?>Label"><?= $view -> get('lang|title'); ?></h5>
 		<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 	</div>
 	<div class="offcanvas-body">
 		<?php $view -> get('module') -> launch('menu', 'bootstrap-offcanvas', $sets_original); ?>
 	</div>
 </div>
-
-<style>
-.offcanvas .dropdown-toggle[aria-expanded="true"] {
-    transform: rotateZ(-180deg);
-    transition: transform 0.5s ease;
-}
-.offcanvas .dropdown-toggle {
-    transform: rotateZ(0deg);
-    transition: transform 0.5s ease;
-    cursor: pointer;
-}
-</style>

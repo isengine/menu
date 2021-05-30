@@ -6,17 +6,19 @@ use is\Helpers\System;
 use is\Helpers\Objects;
 use is\Helpers\Strings;
 
-$object -> eget('main-link-dropdown') -> addCustom('id', 'navbarDropdown-{id}');
-$object -> eget('main-link-dropdown') -> addCustom('role', 'button');
-$object -> eget('main-link-dropdown') -> addCustom('data-bs-toggle', 'dropdown');
-$object -> eget('main-link-dropdown') -> addCustom('aria-expanded', 'false');
+$inner = [
+	'<a class="',
+	'" href="{link}">{lang}</a>
+	<a class="dropdown dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+		<span class="visually-hidden">Toggle Dropdown</span>
+	</a>'
+];
 
-$object -> eget('sub-link-dropdown')  -> addCustom('id', 'navbarDropdown-{id}');
-$object -> eget('sub-link-dropdown')  -> addCustom('role', 'button');
-$object -> eget('sub-link-dropdown')  -> addCustom('data-bs-toggle', 'dropdown');
-$object -> eget('sub-link-dropdown')  -> addCustom('aria-expanded', 'false');
+$object -> eget('main-link') -> addContent('{lang}');
+$object -> eget('sub-link') -> addContent('{lang}');
 
-$object -> eget('sub-container')      -> addCustom('aria-labelledby', 'navbarDropdown-{id}');
+$object -> eget('main-item-dropdown') -> addContent($inner[0] . 'nav-link' . $inner[1]);
+$object -> eget('sub-item-dropdown') -> addContent($inner[0] . 'dropdown-item' . $inner[1]);
 
 $object -> build();
 $object -> print();
