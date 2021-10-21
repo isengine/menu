@@ -26,7 +26,7 @@ class Menu extends Master {
 		
 		$router = Router::getInstance();
 		$this -> structure = $router -> structure;
-		$this -> map = &$this -> structure -> original;
+		$this -> map = $this -> structure -> getMap();
 		//$this -> route = &$this -> structure -> original;
 		
 		$current = &$router -> current;

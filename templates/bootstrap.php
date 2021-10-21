@@ -8,7 +8,7 @@ use is\Helpers\Strings;
 
 use is\Masters\View;
 
-$sets = &$object -> settings;
+$sets = &$this -> settings;
 
 $sets_original = json_encode([
 	'custom'  => $sets['custom'],
@@ -16,7 +16,7 @@ $sets_original = json_encode([
 	'levels'  => $sets['levels']
 ]);
 
-$instance = $object -> get('instance');
+$instance = $this -> get('instance');
 
 $view = View::getInstance();
 

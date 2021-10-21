@@ -6,21 +6,21 @@ use is\Helpers\System;
 use is\Helpers\Objects;
 use is\Helpers\Strings;
 
-$instance = $object -> get('instance');
-$sets = &$object -> settings;
+$instance = $this -> get('instance');
+$sets = &$this -> settings;
 
-//echo print_r($object, 1);
+//echo print_r($this, 1);
 
-//$object -> eget('container') -> addClass('new');
-//$object -> eget('container') -> open(true);
-//$object -> eget('container') -> close(true);
-//$object -> eget('container') -> print();
+//$this -> eget('container') -> addClass('new');
+//$this -> eget('container') -> open(true);
+//$this -> eget('container') -> close(true);
+//$this -> eget('container') -> print();
 
-//$object -> eget('main-inner') -> addContent('{lang}');
-//$object -> eget('sub-inner') -> addContent('{lang}');
+//$this -> eget('main-inner') -> addContent('{lang}');
+//$this -> eget('sub-inner') -> addContent('{lang}');
 
-$object -> build();
-$object -> print();
+$this -> build();
+$this -> print();
 
 ?>
 
@@ -54,6 +54,6 @@ nav div {
 		}
 	?>
 	
-	<?php $object -> blocks('block'); ?>
+	<?php $this -> block('block'); ?>
 	
 </div>

@@ -14,13 +14,13 @@ $inner = [
 	</a>'
 ];
 
-$object -> eget('main-link') -> addContent('{lang}');
-$object -> eget('sub-link') -> addContent('{lang}');
+$this -> eget('main-link') -> addContent('{lang}');
+$this -> eget('sub-link') -> addContent('{lang}');
 
-$object -> eget('main-item-dropdown') -> addContent($inner[0] . 'nav-link' . $inner[1]);
-$object -> eget('sub-item-dropdown') -> addContent($inner[0] . 'dropdown-item' . $inner[1]);
+$this -> eget('main-item-dropdown') -> addContent($inner[0] . 'nav-link' . $inner[1]);
+$this -> eget('sub-item-dropdown') -> addContent($inner[0] . 'dropdown-item' . $inner[1]);
 
-$object -> build();
-$object -> print();
+$this -> build();
+$this -> print();
 
 ?>

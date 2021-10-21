@@ -15,18 +15,18 @@ $inner = [
 	</a>'
 ];
 
-$object -> eget('main-link') -> addContent('{lang}');
-$object -> eget('sub-link') -> addContent('{lang}');
+$this -> eget('main-link') -> addContent('{lang}');
+$this -> eget('sub-link') -> addContent('{lang}');
 
-$object -> eget('sub-wrapper') -> addId('navbar-sub-{id}');
+$this -> eget('sub-wrapper') -> addId('navbar-sub-{id}');
 
-$object -> eget('main-link-dropdown') -> addContent($inner[0] . 'true' . $inner[1]);
-$object -> eget('sub-link-dropdown') -> addContent($inner[0] . 'true' . $inner[1]);
+$this -> eget('main-link-dropdown') -> addContent($inner[0] . 'true' . $inner[1]);
+$this -> eget('sub-link-dropdown') -> addContent($inner[0] . 'true' . $inner[1]);
 
-$object -> eget('main-link-dropdown-active') -> addContent($inner[0] . 'false' . $inner[1]);
-$object -> eget('sub-link-dropdown-active') -> addContent($inner[0] . 'false' . $inner[1]);
+$this -> eget('main-link-dropdown-active') -> addContent($inner[0] . 'false' . $inner[1]);
+$this -> eget('sub-link-dropdown-active') -> addContent($inner[0] . 'false' . $inner[1]);
 
-$object -> build();
-$object -> print();
+$this -> build();
+$this -> print();
 
 ?>
