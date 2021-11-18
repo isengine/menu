@@ -345,7 +345,7 @@ class Menu extends Master {
 	public function setVariables($name) {
 		
 		$view = View::getInstance();
-		$lang = $view -> get('lang|menu');
+		$lang = $view -> get('lang|nav');
 		
 		$data = $name ? $this -> structure -> getDataByName($name) : null;
 		$i = $name ? $this -> structure -> getByName($name) : null;
