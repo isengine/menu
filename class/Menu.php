@@ -26,7 +26,7 @@ class Menu extends Master {
 		
 		$router = Router::getInstance();
 		$this -> structure = $router -> structure;
-		$this -> map = $this -> structure -> getMap();
+		$this -> map = $this -> structure -> map -> getMap();
 		//$this -> route = &$this -> structure -> original;
 		
 		$current = &$router -> current;
@@ -343,7 +343,6 @@ class Menu extends Master {
 	}
 	
 	public function setVariables($name) {
-		
 		$view = View::getInstance();
 		$lang = $view -> get('lang|nav');
 		
